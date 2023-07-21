@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Two</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="start-screen">
+        <h1>Tic-Tac-Two</h1>
+        <p>The long awaited sequel to the classic game of Tic-Tac-Toe</p>
+        <button onclick="startGame()">Start</button>
+    </div>
+    <div class="status" hidden></div>
+    <div class="board hidden">
+        <div class="cell" onclick="handleMove(0)"></div>
+        <div class="cell" onclick="handleMove(1)"></div>
+        <div class="cell" onclick="handleMove(2)"></div>
+        <div class="cell" onclick="handleMove(3)"></div>
+        <div class="cell" onclick="handleMove(4)"></div>
+        <div class="cell" onclick="handleMove(5)"></div>
+        <div class="cell" onclick="handleMove(6)"></div>
+        <div class="cell" onclick="handleMove(7)"></div>
+        <div class="cell" onclick="handleMove(8)"></div>
+    </div>
+    <button class="reset-btn" onclick="resetBoard()" hidden>Reset</button>
+  </div>
+  <script src="script.js"></script>
+</body>
