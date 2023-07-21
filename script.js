@@ -3,6 +3,8 @@ let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let gameEnded = false;
 let playerCanMove = true;
+let playerWins = 0;
+let aiWins = 0;
 
 // Start the game
 function startGame() {
@@ -13,6 +15,7 @@ function startGame() {
     startScreen.style.display = "none";
     gameBoard.classList.remove("hidden");
     resetButton.removeAttribute("hidden");
+    updateWins();
 }
 
 // Function to handle a player move
@@ -21,6 +24,12 @@ function handleMove(index) {
         board[index] = currentPlayer;
         document.getElementsByClassName("cell")[index].innerText = currentPlayer;
         if (checkWinner(currentPlayer)) {
+            if (currentPlayer === "X") {
+                playerWins++;
+            } else {
+                aiWins++;
+            }
+            updateWins();
             gameEnded = true;
         } else if (checkDraw()) {
             gameEnded = true;
@@ -36,7 +45,13 @@ function handleMove(index) {
         }
     }
 }
-  
+
+// Function to update the displayed win counts
+function updateWins() {
+    document.querySelector(".player-wins").innerText = `Player Wins: ${playerWins}`;
+    document.querySelector(".ai-wins").innerText = `AI Wins: ${aiWins}`;
+}
+
 // AI makes a move
 function makeAIMove() {
     const availableIndices = [];
@@ -53,6 +68,12 @@ function makeAIMove() {
         document.getElementsByClassName("cell")[aiMoveIndex].innerText = currentPlayer;
   
         if (checkWinner(currentPlayer)) {
+            if (currentPlayer === "X") {
+                playerWins++;
+            } else {
+                aiWins++;
+            }
+            updateWins();
             gameEnded = true;
         } else if (checkDraw()) {
             gameEnded = true;
@@ -84,7 +105,6 @@ function checkWinner(player) {
         const status = document.querySelector(".status");
         status.textContent = `${player} wins!`;
         status.removeAttribute("hidden");
-        gameEnded = true;
         return true;
     }
 
@@ -99,7 +119,6 @@ function checkDraw() {
         const status = document.querySelector(".status");
         status.textContent = "It's a draw!";
         status.removeAttribute("hidden");
-        gameEnded = true;
         return true;
     }
   
@@ -118,6 +137,7 @@ function resetBoard() {
     const status = document.querySelector(".status");
     status.setAttribute("hidden", true);
     status.textContent = "";
+    updateWins();
 }
 
 document.querySelector("button").addEventListener("click", resetBoard);
