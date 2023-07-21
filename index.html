@@ -8,16 +8,11 @@
 </head>
 <body>
   <div class="container">
-    <div class="score">
-      <div class="player-wins">Player Wins: 0</div>
-      <div class="ai-wins">AI Wins: 0</div>
-    </div>
     <div class="start-screen">
         <h1>Tic-Tac-Two</h1>
         <p>The long-awaited sequel to the classic game of Tic-Tac-Toe</p>
-        <button onclick="startGame()">Start</button>
+        <p>Get 3 wins to beat your opponent!</p>
     </div>
-    <div class="status" hidden></div>
     <div class="board hidden">
         <div class="cell" onclick="handleMove(0)"></div>
         <div class="cell" onclick="handleMove(1)"></div>
@@ -29,7 +24,11 @@
         <div class="cell" onclick="handleMove(7)"></div>
         <div class="cell" onclick="handleMove(8)"></div>
     </div>
-    <button class="reset-btn" onclick="resetBoard()" hidden>Reset</button>
+    <div class="score">
+      <div class="player-wins"></div>
+      <div class="ai-wins"></div>
+    </div>
+    <div class="status" hidden></div>
   </div>
   <script src="script.js"></script>
 </body>

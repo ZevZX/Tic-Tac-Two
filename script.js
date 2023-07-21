@@ -5,21 +5,21 @@ let gameEnded = false;
 let playerCanMove = true;
 let playerWins = 0;
 let aiWins = 0;
+const maxWins = 3;
 
 // Start the game
 function startGame() {
     const startScreen = document.querySelector(".start-screen");
-    const gameBoard = document.querySelector(".board");
-    const resetButton = document.querySelector(".reset-btn");
-  
+    const gameBoard = document.querySelector(".board");  
     startScreen.style.display = "none";
     gameBoard.classList.remove("hidden");
-    resetButton.removeAttribute("hidden");
     updateWins();
 }
 
 // Function to handle a player move
 function handleMove(index) {
+    document.querySelector(".player-wins").innerText = `Player Wins: ${playerWins}`;
+    document.querySelector(".ai-wins").innerText = `Opponent Wins: ${aiWins}`;
     if (!gameEnded && board[index] === "" && playerCanMove) {
         board[index] = currentPlayer;
         document.getElementsByClassName("cell")[index].innerText = currentPlayer;
@@ -49,7 +49,7 @@ function handleMove(index) {
 // Function to update the displayed win counts
 function updateWins() {
     document.querySelector(".player-wins").innerText = `Player Wins: ${playerWins}`;
-    document.querySelector(".ai-wins").innerText = `AI Wins: ${aiWins}`;
+    document.querySelector(".ai-wins").innerText = `Opponent Wins: ${aiWins}`;
 }
 
 // AI makes a move
@@ -105,6 +105,7 @@ function checkWinner(player) {
         const status = document.querySelector(".status");
         status.textContent = `${player} wins!`;
         status.removeAttribute("hidden");
+        setTimeout(resetBoard, 1000);
         return true;
     }
 
@@ -119,6 +120,7 @@ function checkDraw() {
         const status = document.querySelector(".status");
         status.textContent = "It's a draw!";
         status.removeAttribute("hidden");
+        setTimeout(resetBoard, 1000);
         return true;
     }
   
@@ -137,7 +139,25 @@ function resetBoard() {
     const status = document.querySelector(".status");
     status.setAttribute("hidden", true);
     status.textContent = "";
+
+    if (playerWins === maxWins || aiWins === maxWins) {
+        const startScreen = document.querySelector(".start-screen");
+        const gameBoard = document.querySelector(".board");
+        startScreen.style.display = "block";
+        gameBoard.classList.add("hidden");
+        gameEnded = true;
+        if (playerWins === maxWins) {
+            status.textContent = "Congratulations! You won the match!";
+        } else {
+            status.textContent = "Your lost! Better luck next time!";
+        }
+        status.removeAttribute("hidden");
+    }
     updateWins();
+    if (!gameEnded && currentPlayer === "O") {
+        playerCanMove = true;
+        setTimeout(makeAIMove, 1000);
+}
 }
 
 document.querySelector("button").addEventListener("click", resetBoard);

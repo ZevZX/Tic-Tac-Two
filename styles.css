@@ -14,6 +14,10 @@ body {
   }
   
   .score {
+    position: absolute;
+    top: 80%; /* Adjust the positioning as needed */
+    left: 50%; /* Adjust the positioning as needed */
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,20 +50,11 @@ body {
   }
   
   .status {
+    position: absolute;
+    top: 85%; /* Adjust the positioning as needed */
+    left: 50%; /* Adjust the positioning as needed */
+    transform: translate(-50%, -50%);
     font-size: 24px;
     font-weight: bold;
-    margin-top: 10px;
-    color: #ff3333;
+    color: #333
   }
-  
-  .reset-btn {
-    margin-top: 20px;
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-  }
-  
